@@ -1,0 +1,20 @@
+- content_for :title_header do
+  %h1= t("layouts.no_tribe.settings")
+= render :partial => "layouts/left_hand_navigation", :locals => { :links => left_hand_navigation_links }
+
+.left-navi-section.settings-section.payment-settings
+  %h2= t("paypal_accounts.payout_info_title")
+
+
+  - if community_ready_for_payments
+    - create_stripe_link = link_to(t("stripe.create_stripe_link"),
+                                   create_url, target: "_blank")
+    = render partial: "stripe_info", locals: { create_stripe_account_link: create_stripe_link,
+        paypal_account_linked: next_action != :ask_order_permission,
+        receive_funds_info_label_tr_key: receive_funds_info_label_tr_key,
+        commission_required: commission_type != :none }
+
+    - if @current_user.uid.blank?
+      = link_to(image_tag("blue-on-light.png"), stripe_oauth_path) 
+    - else 
+      = link_to(image_tag("unlink.png"), stripe_unlink_path) 

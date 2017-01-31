@@ -1,0 +1,33 @@
+
+- content_for :title_header do
+  %h1= t("homepage.index.existing_related_listing")
+#new_listing_form.new-listing-form.centered-section
+= form_tag related_listing_path, :method => :get, :id => "booking-dates" do
+  - arelated.each_with_index do |arel, key|
+    %h2
+      = arel.heading
+      %div.home-fluid-thumbnail-grid-wide
+        .home-fluid-thumbnail-grid  
+          = render partial: "listings/form/grid_item", collection: @all_related_list[key], as: :listing, locals: { show_distance: false }        
+      %div
+        %table{:border => 0}
+          %tbody
+            %tr
+              %td
+                = button_tag t("listings.related_listing.delete_listing"), :name => "commit[#{arel.id}]", :value => "Delete this listing", :class => "send_button"
+              - if (key != 0)
+                %td
+                  = button_tag t("listings.related_listing.move_up"), :name => "commit[#{arel.id}]", :value => "Move listing up", :class => "send_button"
+              - if (key != arelated.size - 1)
+                %td
+                  = button_tag t("listings.related_listing.move_down"), :name => "commit[#{arel.id}]", :value => "Move listing down", :class => "send_button"
+            
+      %p
+  %h2 
+    %table
+      %tbody
+        %tr
+          %td
+            = button_tag t("listings.related_listing.new_listing"), :name => "commit", :value => "New related listing"
+          %td
+            = button_tag "Return to listing", :name => "commit", :value => "Return to listing"

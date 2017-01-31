@@ -1,0 +1,17 @@
+{
+  "repository": "sharetribe/sharetribe",
+  "license": "MIT",
+  "engines": {
+    "node": "6.9"
+  },
+  "scripts": {
+    "postinstall": "cd client && npm install",
+    "clean": "rm -f app/assets/webpack/*"
+  },
+  "optionalDependencies": {
+    "fsevents": "*"
+  },
+  "dependencies": {
+    "check-node-version": "^1.1.2"
+  }
+}

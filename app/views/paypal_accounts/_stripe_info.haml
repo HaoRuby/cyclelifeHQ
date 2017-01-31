@@ -1,0 +1,10 @@
+.row
+  - if @current_user.uid.blank?
+    = t("stripe.payout_info_stripe", create_stripe_account_link: create_stripe_account_link).html_safe
+    - if commission_required
+      = t("stripe.commission_permission_needed")
+  - else
+    = t("stripe.registered_for_stripe")  
+    %p
+      = t("stripe.unlink_account")
+

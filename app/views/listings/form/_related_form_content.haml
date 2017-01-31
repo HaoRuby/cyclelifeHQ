@@ -1,0 +1,4 @@
+-#CLHQ
+= form_for @listing, :html => {:multipart => true} do |form|
+  = render :partial => "listings/form/related_listing", :locals => { :form => form, shape: shape, related_list: related_list, related_order: related_order } 
+  = render partial: "listings/form/grid_item", collection: @related_list, as: :listing, locals: { show_distance: false  }

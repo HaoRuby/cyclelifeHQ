@@ -1,0 +1,23 @@
+- if (@id_related_list.length == 0)
+  %h2= t("listings.form.related_listing.not_found")
+= form.label :related, t("listings.form.related_listing.heading")
+%input{:type => "text", :name=>"rlist", :id=>"relist"}
+= form.label "error", :class => 'error', :id => 'fid' do
+  This field is required
+= form.hidden_field(:related_listing_ids, :value => @id_related_list)
+%h2= t("listings.form.related_listing.closest")
+
+%input{:type => "hidden", :name=>"rorder", :value=> related_order}
+= form.hidden_field(:category_id, :value => @listing.category_id)
+= form.hidden_field(:listing_shape_id, :value => @listing.listing_shape_id)
+= form.submit "Save related listing", :class => "button", :type => "button", :id => "rlbutton"
+
+:javascript
+  $(document).ready($('#fid').hide());
+  $('#rlbutton').click(function() {
+    if ($('#relist').val().length == 0) {
+      $('#fid').show();
+      return
+    }
+    $('input[name="rlist"]').closest('form').submit();
+  });

@@ -1,0 +1,4 @@
+.price-container
+  - if shape[:deeplink_enabled]
+    = form.label :deep_link, t("listings.form.deep_link.dlink")
+    = form.text_field(:deep_link, :class => "deeplink-container", :maxlength => "240")
